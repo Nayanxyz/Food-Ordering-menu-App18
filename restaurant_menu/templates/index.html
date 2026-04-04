@@ -4,7 +4,7 @@
     <h1> Restaurant Menu </h1>
     <ul class="list-group list-group-flush">
         {% for meal in meals %}
-            <h2> {{ meal.1 }}</h2>
+            <h2 class="pt-5"> {{ meal.1 }}</h2>
             {% for row in item_list %}
                 {% if row.meal_type == meal.0 %}
                     {% if row.status == 0 %}
