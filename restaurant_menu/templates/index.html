@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container">
     <h1> Restaurant Menu </h1>
+    <ul class="list-group list-group-flush">
         {% for meal in meals %}
             <h2> {{ meal.1 }}</h2>
             {% for row in item_list %}
@@ -16,5 +17,6 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
+    </ul>
 </div>
 {% endblock content %}
