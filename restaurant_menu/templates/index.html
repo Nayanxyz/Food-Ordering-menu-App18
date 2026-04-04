@@ -11,6 +11,7 @@
                         <p>{{ row.description }}</p>
                     {% else %}
                         <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal }}</h3></a>
+                        <p>{{ row.description }}</p>
                     {% endif %}
                 {% endif %}
             {% endfor %}
