@@ -1,0 +1,124 @@
+1. models.py (The Database Blueprint)
+
+    This file is usually created first. It acts as the blueprint for the database,
+    defining exactly what kind of information the application will store.
+
+    Libraries Imported:
+
+    models from django.db: This allows the application to use Django's built-in
+                        database tools to create tables without writing raw SQL code.
+
+    User from django.contrib.auth.models: This brings in the system's user accounts so that a food
+                                          item can be linked to the specific person (or chef) who created it.
+
+    Contents and Classes:
+
+    MEAL_TYPE and STATUS Variables: These are lists of predefined choices.
+                                    MEAL_TYPE categorizes food into starters, salads, main dishes, and desserts.
+                                    STATUS acts as an on/off switch to mark an item as "Unavailable" (0) or "Available" (1).
+
+    class Item(models.Model): This creates a database table called "Item" to store individual food dishes.
+                            It defines fields for the dish's name (meal), a text description, the cost (price),
+                            the category (meal_type), the creator (author), and whether it is currently available (status).
+                            It also automatically records the dates the item was created and last updated.
+
+    def __str__(self): This is a helper function. It tells the system that whenever it needs to display an
+                        Item object as text (like in the admin dashboard), it should just show the name of the
+                        meal (e.g., "Pizza") instead of a confusing database ID (e.g., "Item Object (1)").
+
+2. admin.py (The Management Dashboard)
+
+    After creating the database structure, this file is used to register the newly created
+    model so that the site administrator can manage the data through a user-friendly website dashboard.
+
+    Libraries Imported:
+
+    admin from django.contrib: This imports Django's built-in admin panel tools.
+
+    Item from .models: This imports the specific food blueprint created in the first step.
+
+    Contents and Classes:
+
+    class MenuItemAdmin(admin.ModelAdmin): This class customizes how the food items are displayed in the admin dashboard.
+
+    list_display tells the dashboard to show both the meal's name and its availability status in the main list.
+
+    list_filter creates a sidebar allowing the admin to easily filter items to see only "Available" or "Unavailable" dishes.
+
+    search_fields adds a search bar at the top so the admin can quickly find a dish by typing its name or description.
+
+    admin.site.register(...): This command officially connects the Item model and the custom MenuItemAdmin
+                                settings to the admin dashboard.
+
+3. views.py (The Logic and Data Fetcher)
+
+    Once the database is set up and manageable, the system needs logic to fetch data from
+    the database and send it to the web pages (HTML templates) that the user sees.
+
+    Libraries Imported:
+
+    generic from django.views: This imports pre-written, standard "views" (logic templates) that save time,
+                                such as displaying a list of items or details of one item.
+
+    Item and MEAL_TYPE from .models: This allows the logic to interact with the database and the predefined
+                                    food categories.
+
+    Contents and Classes:
+
+    class MenuList(generic.ListView): This logic handles the homepage.
+                                      It is designed to grab a list of all food items from the database, organize them
+                                      by the date they were created, and send that data to a file called index.html.
+                                      It also sends the MEAL_TYPE list so the webpage can group the foods by category.
+
+
+    class MenuItemDetail(generic.DetailView): This handles the page for a single, specific food dish. It takes one
+                                            Item from the database and sends it to the menu_item_detail.html file to
+                                            be displayed.
+
+    class About(generic.ListView): This logic is responsible for rendering the "About" page, linking the user to
+                                    the about.html file.
+
+4. restaurant_menu/urls.py (The App's Navigation Map)
+
+    After the logic (views) is written, the application needs to know which web address (URL) should
+    trigger which piece of logic. This file acts as a localized map for the restaurant menu app.
+
+    Libraries Imported:
+
+    path from django.urls: This tool is used to define individual URL routes.
+
+    views from .: This imports all the logic classes created in the previous step so they can be attached to URLs.
+
+    Contents:
+
+    urlpatterns: This is a list that connects web addresses to the views.
+
+    path('') connects the base address (the homepage) to the MenuList view.
+
+    path('item/<int:pk>') connects an address with a specific ID number (like /item/5) to
+    the MenuItemDetail view, ensuring the system pulls up the correct food item.
+
+    path('about/') connects the /about/ web address to the About view.
+
+5. mysite/urls.py (The Project's Master Map)
+
+    This is the master navigation file for the entire website. It tells the main project where to
+    route general internet traffic.
+
+    Libraries Imported:
+
+    admin from django.contrib: This allows the master map to route traffic to the admin dashboard.
+
+    path and include from django.urls: path defines the route, and include allows this master
+                                        map to forward traffic to the smaller, localized maps
+                                        (like the one created in step 4).
+
+    Contents:
+
+    urlpatterns: This is the master list of all website routes.
+
+    path('admin/') ensures that anyone typing /admin into their browser is directed to the management dashboard.
+
+    path('', include('restaurant_menu.urls')) takes any traffic going to the main,
+    empty web address (the homepage) and forwards it entirely to the restaurant_menu app's
+    map so that the app can handle the routing from there.
