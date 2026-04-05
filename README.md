@@ -3,13 +3,28 @@
 
 A dynamic, full-stack web application built with Python and Django. This project allows a restaurant to display its menu to customers, categorized logically by meal types (Starters, Salads, Main Dishes, Desserts), and provides a robust admin dashboard for staff to manage food items and availability.
 
+
+
+
 ## ✨ Features
 
-* **Categorized Menu Display:** Customers can browse food items neatly organized by their respective categories.
-* **Detailed Item Views:** Clicking on a menu item opens a dedicated page displaying its full description, price, and exact category.
-* **Real-time Availability:** Menu items display their current status (Available or Unavailable).
-* **Admin Management Dashboard:** A secure backend interface where administrators can seamlessly add new dishes, update prices, change descriptions, and toggle item availability.
-* **Responsive Design:** The frontend is styled using Bootstrap 5, ensuring the application looks great on both desktop and mobile devices.
+* ***Categorized Menu Display:*** Customers can browse food items neatly organized by their respective categories.
+
+ <img width="1788" height="901" alt="Main-Menu" src="https://github.com/user-attachments/assets/ff454bf5-fe3e-4311-a1fa-064be299fa5b" />
+
+* ***Detailed Item Views:*** Clicking on a menu item opens a dedicated page displaying its full description, price, and exact category.
+
+ <img width="1561" height="961" alt="Description-Dishes" src="https://github.com/user-attachments/assets/3a7d62b4-4dce-4a47-b806-97562f1921c7" />
+
+* ***Real-time Availability:*** Menu items display their current status (Available or Unavailable).
+
+<img width="1848" height="801" alt="Add-Menu" src="https://github.com/user-attachments/assets/eba293de-53c2-4e2a-aeee-dc5a0924f156" />
+
+* ***Admin Management Dashboard:*** A secure backend interface where administrators can seamlessly add new dishes, update prices, change descriptions, and toggle item availability.
+
+ <img width="1871" height="862" alt="Admin-Interface-Menu" src="https://github.com/user-attachments/assets/a436ed68-9924-48ab-854d-f8008c89beed" />
+
+* ***Responsive Design:*** The frontend is styled using Bootstrap 5, ensuring the application looks great on both desktop and mobile devices.
 
 ## 🛠️ Technologies Used
 
